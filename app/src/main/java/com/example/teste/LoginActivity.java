@@ -4,7 +4,6 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Context;
 import android.content.Intent;
-import android.content.IntentFilter;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
@@ -36,16 +35,20 @@ public class LoginActivity extends AppCompatActivity {
             public void onClick(View view) {
                 context = LoginActivity.this;
 
+
+
                 txtSenha = findViewById(R.id.txtPasswordLogin);
                 txtUser = findViewById(R.id.txtUserLogin);
 
                 String user = txtUser.getText().toString();
                 String senha = txtSenha.getText().toString();
-                validateSQLInjection(senha);
-                validateSQLInjection(user);
+
+
+                txtUser.requestFocus();
+
 
                 if(validateLogin(user, senha)){
-                    Intent  intent = new Intent(context, MainActivity.class);
+                    Intent  intent = new Intent(context, MenuActivity.class);
                     startActivity(intent);
                 }else {
                     Tools.showAlert("Erro login", "Usuario ou senha invalidos", context);
@@ -58,9 +61,10 @@ public class LoginActivity extends AppCompatActivity {
 
     }
 
-    private static void validateSQLInjection(String senha){
+    private static String validateSQLInjection(String senha){
         String senhaReplace;
         senhaReplace = senha.replaceAll("'", "");
+        return senhaReplace;
 
     }
     private static boolean validateLogin(String user, String password){

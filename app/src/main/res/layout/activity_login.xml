@@ -15,11 +15,9 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Usuario"
-        android:layout_gravity="center"
+
         android:layout_marginTop="100dp"
-        android:textSize="30dp"
-        android:padding="10dp"
-        android:textColor="@color/black"
+        style="@style/TextPrimary"
 
 
         >
@@ -34,6 +32,7 @@
         android:padding="10dp"
 
 
+
         >
     </EditText>
 
@@ -41,11 +40,11 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Senha"
-        android:layout_gravity="center"
+
         android:layout_marginTop="20dp"
-        android:textSize="30dp"
-        android:padding="10dp"
-        android:textColor="@color/black"
+        style="@style/TextPrimary"
+
+
 
 
 
@@ -78,6 +77,7 @@
         style="@style/ButtonPrimary"
         android:textColor="@color/white"
         android:background="@color/verde"
+        android:fontFamily="@font/spartan_semibold"
 
 
 

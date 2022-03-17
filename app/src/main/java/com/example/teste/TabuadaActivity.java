@@ -1,6 +1,5 @@
 package com.example.teste;
 
-import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Context;
@@ -11,7 +10,7 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 
-public class MainActivity extends AppCompatActivity {
+public class TabuadaActivity extends AppCompatActivity {
 
     TextView lblTabuada;
     Button btnCalcular;
@@ -31,7 +30,7 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
 
-                context = MainActivity.this;
+                context = TabuadaActivity.this;
 
                 int numeroCalcular = 0;
 
