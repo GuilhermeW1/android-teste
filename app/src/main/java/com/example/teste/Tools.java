@@ -1,6 +1,7 @@
 package com.example.teste;
 
 import android.content.Context;
+import android.content.SharedPreferences;
 import android.util.Log;
 
 import androidx.appcompat.app.AlertDialog;
@@ -15,5 +16,12 @@ public class Tools {
         }catch (Exception ex){
             Log.e("MostrarAlerta", ex.getMessage());
         }
+
+
     }
+
+
+
+
 }
+
