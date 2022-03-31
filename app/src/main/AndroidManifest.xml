@@ -10,6 +10,9 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.Teste">
         <activity
+            android:name=".ListActivity"
+            android:exported="false" />
+        <activity
             android:name=".ButtonsActivitty"
             android:exported="false" />
         <activity

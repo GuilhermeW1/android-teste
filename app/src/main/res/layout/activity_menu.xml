@@ -8,82 +8,110 @@
     android:orientation="vertical"
     android:id="@+id/viewMenu">
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Menu"
-        style="@style/TextPrimary"
-        android:layout_marginTop="20dp"
-        >
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
 
-    </TextView>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
 
-    <Button
-        android:id="@+id/btnTabuada"
-        android:layout_width="300dp"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center"
-        android:layout_marginTop="30dp"
-        android:text="Tabuada"
-        style="@style/ButtonDefault"
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Menu"
+                style="@style/TextPrimary"
+                android:layout_marginTop="20dp"
+                >
 
-        >
-    </Button>
-    <Button
-        android:id="@+id/btnCalculadora"
-        android:layout_width="300dp"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center"
-        android:layout_marginTop="30dp"
-        android:text="Calculadora"
-        style="@style/ButtonDefault"
+            </TextView>
 
-        >
-    </Button>
-    <Button
-        android:id="@+id/btnView"
-        android:layout_width="300dp"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center"
-        android:layout_marginTop="30dp"
-        android:text="View"
-        style="@style/ButtonDefault"
+            <Button
+                android:id="@+id/btnTabuada"
+                android:layout_width="300dp"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_marginTop="30dp"
+                android:text="Tabuada"
+                style="@style/ButtonDefault"
 
-        >
-    </Button>
-    <Button
-        android:id="@+id/btnToast"
-        android:layout_width="300dp"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center"
-        android:layout_marginTop="30dp"
-        android:text="toast"
-        style="@style/ButtonDefault"
+                >
+            </Button>
+            <Button
+                android:id="@+id/btnCalculadora"
+                android:layout_width="300dp"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_marginTop="30dp"
+                android:text="Calculadora"
+                style="@style/ButtonDefault"
 
-        >
-    </Button>
-    <Button
-        android:id="@+id/btnSnackbar"
-        android:layout_width="300dp"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center"
-        android:layout_marginTop="30dp"
-        android:text="snackbar"
-        style="@style/ButtonDefault"
+                >
+            </Button>
+            <Button
+                android:id="@+id/btnView"
+                android:layout_width="300dp"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_marginTop="30dp"
+                android:text="View"
+                style="@style/ButtonDefault"
 
-        >
-    </Button>
-    <Button
-        android:id="@+id/btnLogout"
-        android:layout_width="300dp"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center"
-        android:layout_marginTop="30dp"
-        android:text="Logout"
-        style="@style/ButtonDefault"
+                >
+            </Button>
+            <Button
+                android:id="@+id/btnToast"
+                android:layout_width="300dp"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_marginTop="30dp"
+                android:text="toast"
+                style="@style/ButtonDefault"
 
-        >
-    </Button>
+                >
+            </Button>
+            <Button
+                android:id="@+id/btnSnackbar"
+                android:layout_width="300dp"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_marginTop="30dp"
+                android:text="snackbar"
+                style="@style/ButtonDefault"
+
+                >
+            </Button>
+
+            <Button
+                android:id="@+id/btnList"
+                android:layout_width="300dp"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_marginTop="30dp"
+                android:text="List"
+                style="@style/ButtonDefault"
+
+                >
+            </Button>
+
+            <Button
+                android:id="@+id/btnLogout"
+                android:layout_width="300dp"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_marginTop="30dp"
+                android:text="Logout"
+                style="@style/ButtonDefault"
+
+                >
+            </Button>
+
+
+
+        </LinearLayout>
+    </ScrollView>
+
 
 
 </LinearLayout>

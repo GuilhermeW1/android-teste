@@ -22,7 +22,7 @@ public class MenuActivity extends AppCompatActivity {
         setContentView(R.layout.activity_menu);
 
 
-
+        Button btnList = findViewById(R.id.btnList);
         Button btnTabuada = findViewById(R.id.btnTabuada);
         Context context = MenuActivity.this;
         Button btnCalculadora = findViewById(R.id.btnCalculadora);
@@ -81,6 +81,15 @@ public class MenuActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 Snackbar.make(linear, "Juca bala", BaseTransientBottomBar.LENGTH_LONG).show();
+            }
+        });
+
+        btnList.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(context, ListActivity.class);
+                startActivity(intent);
+
             }
         });
 
