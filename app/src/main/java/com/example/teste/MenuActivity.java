@@ -30,6 +30,7 @@ public class MenuActivity extends AppCompatActivity {
         Button btnToast = findViewById(R.id.btnToast);
         Button btnSnackbar = findViewById(R.id.btnSnackbar);
         Button btnLogout = findViewById(R.id.btnLogout);
+        Button bntMapa = findViewById(R.id.btnMap);
 
         LinearLayout linear = findViewById(R.id.viewMenu);
 
@@ -37,6 +38,13 @@ public class MenuActivity extends AppCompatActivity {
 
 
 
+        bntMapa.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(context, MapsActivity.class);
+                startActivity(intent);
+            }
+        });
 
         btnTabuada.setOnClickListener(new View.OnClickListener() {
             @Override

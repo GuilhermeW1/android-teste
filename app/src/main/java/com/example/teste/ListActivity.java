@@ -4,8 +4,10 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Context;
 import android.os.Bundle;
+import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.ListView;
 
 import java.lang.reflect.Array;
@@ -16,9 +18,11 @@ import java.util.List;
 
 public class ListActivity extends AppCompatActivity {
     Context context;
-    ArrayList<String> lista;
     ListView listaView;
-
+    Button btnSalvar;
+    EditText txtItem;
+    ArrayList<String> lista;
+    ArrayAdapter<String> adapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -27,20 +31,33 @@ public class ListActivity extends AppCompatActivity {
 
         listaView = findViewById(R.id.ListViewTeste);
         context = ListActivity.this;
+        txtItem = findViewById(R.id.txtItem_lista);
+        btnSalvar = findViewById(R.id.btnSalvarItemLista);
 
-        lista = new ArrayList<String>();
-
-        lista.add("abacate");
-
-        for (int x=0; x<=10;x++){
-            lista.add("contador "+String.valueOf(x));
-        }
-        lista.add("desgraca de array em java");
+        lista = new ArrayList<>();
 
 
+        btnSalvar.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                String item = txtItem.getText().toString().trim();
+                if(!item.equals("")){
+                    lista.add(item);
 
+                    adapter = new ArrayAdapter<>(context, android.R.layout.simple_list_item_1, lista);
+                    
+                    listaView.setAdapter(adapter);
 
-        ArrayAdapter<String> adapter = new ArrayAdapter<String>(context, android.R.layout.simple_list_item_1, lista);
-        listaView.setAdapter(adapter);
+                    txtItem.setText("");
+                    txtItem.requestFocus();
+                }else{
+
+                }
+            }
+        });
+
     }
+
+
+
 }

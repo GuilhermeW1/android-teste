@@ -34,7 +34,7 @@
 
     </style>
     <style name="ButtonDefault" parent="TextAppearance.AppCompat.Widget.Button">
-        <item name="android:padding">20dp</item>
+        <item name="android:padding">10dp</item>
         <item name="android:background">@color/verde</item>
         <item name="android:textColor">@color/azul</item>
         <item name="android:layout_gravity">center</item>
