@@ -8,29 +8,57 @@
     android:orientation="vertical">
 
     <LinearLayout
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content">
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
 
-        <EditText
-            android:layout_width="250dp"
+        <LinearLayout
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:id="@+id/txtItem_lista"
-            android:layout_margin="20px"
-            android:inputType="text"
-            >
+            android:orientation="horizontal">
 
-        </EditText>
+            <EditText
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/txtItem_lista"
+                android:layout_margin="10dp"
+                android:inputType="text"
+                android:hint="Nome"
+                >
+            </EditText>
 
-        <Button
-            android:id="@+id/btnSalvarItemLista"
-            android:layout_width="110dp"
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_margin="20px"
-            android:text="a"
-            style="@style/ButtonDefault"
-            >
+            android:orientation="horizontal">
 
-        </Button>
+            <EditText
+                android:layout_width="250dp"
+                android:layout_height="wrap_content"
+                android:id="@+id/txtItem_description"
+                android:layout_margin="10dp"
+                android:inputType="text"
+                android:hint="Description"
+                >
+            </EditText>
+
+            <Button
+                android:id="@+id/btnSalvarItemLista"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="10dp"
+                android:text="Submit"
+                style="@style/ButtonDefault"
+                >
+
+            </Button>
+        </LinearLayout>
+
+
+
+
 
     </LinearLayout>
 
@@ -39,6 +67,7 @@
         android:id="@+id/ListViewTeste"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:layout_margin="10dp"
         >
 
     </ListView>
