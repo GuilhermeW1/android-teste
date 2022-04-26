@@ -37,7 +37,7 @@ public class MenuActivity extends AppCompatActivity {
         SharedPreferences sharedPreferences = getSharedPreferences("loginApp", Context.MODE_PRIVATE);;
 
 
-
+        /*
         bntMapa.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -45,7 +45,7 @@ public class MenuActivity extends AppCompatActivity {
                 startActivity(intent);
             }
         });
-
+*/
         btnTabuada.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {

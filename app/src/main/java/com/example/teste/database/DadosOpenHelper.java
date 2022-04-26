@@ -25,8 +25,8 @@ public class DadosOpenHelper extends SQLiteOpenHelper {
             sql.append(Tables.TB_LINGUAGENS);
             sql.append("(");
             sql.append("id INTEGER PRIMARY KEY AUTOINCREMENT, ");
-            sql.append("nome VARCHAR(30) NOT NULL, ");
-            sql.append("descricao TEXT, ");
+            sql.append("name VARCHAR(30) NOT NULL, ");
+            sql.append("description TEXT, ");
             sql.append(")");
             db.execSQL(sql.toString());
 
@@ -34,6 +34,7 @@ public class DadosOpenHelper extends SQLiteOpenHelper {
             Tools.toastMessage(ex.getMessage(), context);
         }
     }
+
 
     @Override
     public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
