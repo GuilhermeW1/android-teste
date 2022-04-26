@@ -25,6 +25,25 @@ import java.util.ArrayList;
             this.context = context;
         }
 
+        public ArrayList<Language> preencher(){
+            Language lang= new Language();
+            StringBuilder sql = new StringBuilder();
+
+            sql.append("select * from "+Tables.TB_LINGUAGENS);
+
+            Cursor res = conexao.rawQuery(sql.toString(), null);
+
+            lang.setName(res.getString(res.getColumnIndexOrThrow("name")));
+            lang.setDescription(res.getString(res.getColumnIndexOrThrow("description")));
+
+            ArrayList<Language> lista = new ArrayList<>();
+
+            lista.add(lang);
+
+            return lista;
+
+        }
+
 
         public Language buscar(int id){
             try{
@@ -58,7 +77,7 @@ import java.util.ArrayList;
 
                 ContentValues valores = new ContentValues();
                 valores.put("name", objeto.getName());
-                valores.put("descriprion", objeto.getDescription());
+                valores.put("description", objeto.getDescription());
 
                 conexao.insertOrThrow(Tables.TB_LINGUAGENS, null, valores);
 

@@ -11,6 +11,7 @@ import android.widget.EditText;
 import android.widget.ListView;
 
 import com.example.teste.adapter.LanguageAdapter;
+import com.example.teste.controllers.LanguageController;
 import com.example.teste.models.Language;
 
 
@@ -36,7 +37,18 @@ public class ListActivity extends AppCompatActivity {
         btnSalvar = findViewById(R.id.btnSalvarItemLista);
         txtDescription = findViewById(R.id.txtItem_description);
 
+        LanguageController langController = new LanguageController(context);
+
         lista = new ArrayList<>();
+
+        lista = langController.lista();
+        if(lista != null){
+            adapter = new LanguageAdapter(context, lista);
+            listaView.setAdapter(adapter);
+            System.out.println("entrei para setar a lista pela busca no banco de dados");
+        }
+
+
 
 
         btnSalvar.setOnClickListener(new View.OnClickListener() {
@@ -47,7 +59,7 @@ public class ListActivity extends AppCompatActivity {
                 String itemDescription = txtDescription.getText().toString().trim();
 
                 if(!item.equals("") && !itemDescription.equals("")){
-                    object = new Language();
+                    /*object = new Language();
                     object.setId(1);
                     object.setName(item);
                     object.setDescription(itemDescription);
@@ -56,12 +68,21 @@ public class ListActivity extends AppCompatActivity {
                     lista.add(object);
 
                     adapter = new LanguageAdapter(context, lista);
-                    
+
                     listaView.setAdapter(adapter);
 
                     txtItem.setText("");
                     txtDescription.setText("");
                     txtItem.requestFocus();
+                    */
+                     object = new Language();
+                     object.setName(item);
+                     object.setDescription(itemDescription);
+
+                    LanguageController langController = new LanguageController(context);
+                    langController.incluir(object);
+                    System.out.println("to adicionando um novo");
+
                 }else{
                     Tools.toastMessage("ta faltando coisa aa", context);
                 }
