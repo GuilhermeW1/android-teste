@@ -5,6 +5,7 @@ public class Language {
     private String name;
     private int id;
     private String description;
+    private int favorito;
 
 
     public String getName() {
@@ -29,6 +30,14 @@ public class Language {
 
     public void setDescription(String description) {
         this.description = description;
+    }
+
+    public int getFavorito() {
+        return favorito;
+    }
+
+    public void setFavorito(int favorito) {
+        this.favorito = favorito;
     }
 
     @Override

@@ -62,6 +62,7 @@ import java.util.ArrayList;
                     objeto.setId(resultado.getInt(resultado.getColumnIndexOrThrow("id")));
                     objeto.setName(resultado.getString(resultado.getColumnIndexOrThrow("name")));
                     objeto.setDescription(resultado.getString(resultado.getColumnIndexOrThrow("description")));
+                    //objeto.setFavorito(resultado.getInt.getcolumnu....."favorito")
                 }
 
                 return objeto;
@@ -95,6 +96,7 @@ import java.util.ArrayList;
                 ContentValues valores = new ContentValues();
                 valores.put("name", objeto.getName());
                 valores.put("description", objeto.getDescription());
+                //valore.put("favorito", objeto.getFavorito())
 
                 String[] parametros = new String[1];
                 parametros[0] = String.valueOf(objeto.getId());

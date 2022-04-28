@@ -12,6 +12,8 @@ import android.widget.TextView;
     import android.widget.Toast;
 
 
+    import com.example.teste.LanguagesActivity;
+    import com.example.teste.ListActivity;
     import com.example.teste.R;
     import com.example.teste.Tools;
     import com.example.teste.models.Language;
@@ -42,16 +44,25 @@ import android.widget.TextView;
 
                 TextView description = rowView.findViewById(R.id.lblItem_description_language);
                 TextView name = rowView.findViewById(R.id.lblName_item_language);
-
+                //imgview favorito = row.findasdf......
                 name.setText(objeto.getName());
                 description.setText(objeto.getDescription());
+
+                /*
+                if(objeto.getFavorito() == 1){
+                    favorito.setVisibility(View.VISIBLE);
+
+                }else{
+                    favorito.setVisibility(View.GONE);
+                }
+                */
 
                 rowView.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
-                        //Intent tela = new Intent(context, NOVATELAAQUI_Activity.class);
-                        //tela.putExtra("id", objeto.getId());
-                        //context.startActivity(tela);
+                        Intent tela = new Intent(context, LanguagesActivity.class);
+                        tela.putExtra("id", objeto.getId());
+                        context.startActivity(tela);
                     }
                 });
 

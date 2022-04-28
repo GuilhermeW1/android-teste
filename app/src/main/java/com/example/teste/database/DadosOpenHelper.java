@@ -8,7 +8,7 @@ import android.widget.Toast;
 import com.example.teste.Tools;
 
 public class DadosOpenHelper extends SQLiteOpenHelper {
-    private static final int VERSION = 1; //versão do banco de dados
+    private static final int VERSION = 2; //versão do banco de dados
     private static final String NM_BANCO = "bancao";
     private Context context;
 
@@ -23,10 +23,11 @@ public class DadosOpenHelper extends SQLiteOpenHelper {
             StringBuilder sql = new StringBuilder();
             sql.append(" CREATE TABLE IF NOT EXISTS ");
             sql.append(Tables.TB_LINGUAGENS);
-            sql.append("(");
-            sql.append("id INTEGER PRIMARY KEY AUTOINCREMENT, ");
-            sql.append("name VARCHAR(30) NOT NULL, ");
-            sql.append("description TEXT, ");
+            sql.append(" (");
+            sql.append(" id INTEGER PRIMARY KEY AUTOINCREMENT, ");
+            sql.append(" name VARCHAR(30) NOT NULL, ");
+            sql.append(" description TEXT, ");
+            sql.append(" favorito BIT ");
             sql.append(")");
             db.execSQL(sql.toString());
 
@@ -40,9 +41,17 @@ public class DadosOpenHelper extends SQLiteOpenHelper {
 
     @Override
     public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
+        StringBuilder sql;
         try{
-
-
+            if(oldVersion ==2) {
+                sql = new StringBuilder();
+                sql.append(" ALTER TABLE ");
+                sql.append(Tables.TB_LINGUAGENS);
+                sql.append(" ( ADD COLUMN ");
+                sql.append(" favorito BIT ");
+                sql.append(")");
+                db.execSQL(sql.toString());
+            }
 
         }catch (Exception ex){
 
