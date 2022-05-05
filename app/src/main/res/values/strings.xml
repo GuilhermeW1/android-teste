@@ -1,4 +1,11 @@
 <resources>
     <string name="app_name">Teste</string>
     <string name="title_activity_maps">MapsActivity</string>
+
+    <string-array name="notas">
+        <item>NOTAS</item>
+        <item>Nota1</item>
+        <item>Nota1</item>
+        <item>Nota1</item>
+    </string-array>
 </resources>

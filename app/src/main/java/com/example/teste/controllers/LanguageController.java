@@ -23,24 +23,6 @@ import java.util.ArrayList;
             DadosOpenHelper banco = new DadosOpenHelper(context);
             this.conexao = banco.getWritableDatabase();
             this.context = context;
-        }
-
-        public ArrayList<Language> preencher(){
-            Language lang= new Language();
-            StringBuilder sql = new StringBuilder();
-
-            sql.append("select * from "+Tables.TB_LINGUAGENS);
-
-            Cursor res = conexao.rawQuery(sql.toString(), null);
-
-            lang.setName(res.getString(res.getColumnIndexOrThrow("name")));
-            lang.setDescription(res.getString(res.getColumnIndexOrThrow("description")));
-
-            ArrayList<Language> lista = new ArrayList<>();
-
-            lista.add(lang);
-
-            return lista;
 
         }
 
@@ -62,7 +44,8 @@ import java.util.ArrayList;
                     objeto.setId(resultado.getInt(resultado.getColumnIndexOrThrow("id")));
                     objeto.setName(resultado.getString(resultado.getColumnIndexOrThrow("name")));
                     objeto.setDescription(resultado.getString(resultado.getColumnIndexOrThrow("description")));
-                    //objeto.setFavorito(resultado.getInt.getcolumnu....."favorito")
+                    objeto.setFavorito(resultado.getInt(resultado.getColumnIndexOrThrow("favorito")));
+                    objeto.setNota(resultado.getInt(resultado.getColumnIndexOrThrow("nota")));
                 }
 
                 return objeto;
@@ -79,6 +62,10 @@ import java.util.ArrayList;
                 ContentValues valores = new ContentValues();
                 valores.put("name", objeto.getName());
                 valores.put("description", objeto.getDescription());
+                valores.put("favorito", objeto.getFavorito());
+                valores.put("nota", objeto.getNota());
+
+                ContentValues test = valores;
 
                 conexao.insertOrThrow(Tables.TB_LINGUAGENS, null, valores);
 
@@ -96,7 +83,8 @@ import java.util.ArrayList;
                 ContentValues valores = new ContentValues();
                 valores.put("name", objeto.getName());
                 valores.put("description", objeto.getDescription());
-                //valore.put("favorito", objeto.getFavorito())
+                valores.put("favorito", objeto.getFavorito());
+                valores.put("nota", objeto.getNota());
 
                 String[] parametros = new String[1];
                 parametros[0] = String.valueOf(objeto.getId());
@@ -146,6 +134,8 @@ import java.util.ArrayList;
                         objeto.setId(resultado.getInt(resultado.getColumnIndexOrThrow("id")));
                         objeto.setName(resultado.getString(resultado.getColumnIndexOrThrow("name")));
                         objeto.setDescription(resultado.getString(resultado.getColumnIndexOrThrow("description")));
+                        objeto.setFavorito(resultado.getInt(resultado.getColumnIndexOrThrow("favorito")));
+                        objeto.setNota(resultado.getInt(resultado.getColumnIndexOrThrow("nota")));
 
                         listagem.add(objeto);
 

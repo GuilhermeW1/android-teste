@@ -3,9 +3,15 @@ package com.example.teste;
 import android.content.Context;
 import android.content.SharedPreferences;
 import android.util.Log;
+import android.widget.ArrayAdapter;
+import android.widget.Spinner;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AlertDialog;
+
+import com.example.teste.models.Nota;
+
+import java.util.ArrayList;
 
 public class Tools {
 
@@ -25,6 +31,8 @@ public class Tools {
         Toast toast = Toast.makeText(context, message, Toast.LENGTH_LONG);
         toast.show();
     }
+
+
 
 
 

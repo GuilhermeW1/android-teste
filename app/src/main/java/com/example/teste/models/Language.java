@@ -6,6 +6,7 @@ public class Language {
     private int id;
     private String description;
     private int favorito;
+    private int nota;
 
 
     public String getName() {
@@ -34,6 +35,14 @@ public class Language {
 
     public int getFavorito() {
         return favorito;
+    }
+
+    public int getNota() {
+        return nota;
+    }
+
+    public void setNota(int nota) {
+        this.nota = nota;
     }
 
     public void setFavorito(int favorito) {

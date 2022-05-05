@@ -5,16 +5,29 @@
     android:layout_margin="10dp"
     android:orientation="vertical">
 
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content">
+
     <TextView
         android:id="@+id/lblName_item_language"
-        android:layout_width="match_parent"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="10dp"
         android:paddingLeft="5dp"
         android:layout_marginLeft="5dp"
         android:text="java">
 
+
     </TextView>
+        <ImageView
+            android:id="@+id/estrela_imageView"
+            android:layout_width="24dp"
+            android:layout_height="24dp"
+            android:src="@drawable/estrela">
+
+        </ImageView>
+    </LinearLayout>
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"

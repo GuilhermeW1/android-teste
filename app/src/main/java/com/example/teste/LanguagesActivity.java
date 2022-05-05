@@ -10,13 +10,17 @@ import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.ListView;
+import android.widget.Spinner;
 
 import com.example.teste.adapter.LanguageAdapter;
 import com.example.teste.controllers.LanguageController;
 import com.example.teste.models.Language;
+import com.example.teste.models.Nota;
 
 import java.util.ArrayList;
 
@@ -29,6 +33,8 @@ public class LanguagesActivity extends AppCompatActivity {
     LanguageController controller;
     Context context;
     int id_linguagem;
+    Spinner spinner;
+    CheckBox favorit;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -38,22 +44,54 @@ public class LanguagesActivity extends AppCompatActivity {
         txtNome = findViewById(R.id.txtNome_linguagem);
         txtDescricao = findViewById(R.id.txtDescricao_linguagem);
         context = LanguagesActivity.this;
+        favorit = findViewById(R.id.checkboxFavorit);
+        spinner = findViewById(R.id.spininer);
+
 
         //Verificar se veio algum EXTRA da tela anterior
         Bundle extras = getIntent().getExtras();
+        notaAdapter();
+
         if(extras != null){
             id_linguagem = extras.getInt("id", 0);
+
             //buscar através desta chave
             controller = new LanguageController(context);
             objeto = controller.buscar(id_linguagem);
+
             if(objeto != null){
                 txtNome.setText(objeto.getName());
                 txtDescricao.setText(objeto.getDescription());
+
+                if(objeto.getFavorito() == 1){
+                    favorit.setChecked(true);
+                }else{
+                    favorit.setChecked(false);
+                }
+
+                /*
+                for(int x =0; ;x++){
+                    if(spinner.getAdapter().getItemId(x) != objeto.getNota()){
+
+                    }else{
+                        break;
+                    }
+                }
+                */
+
+                spinner.setSelection(objeto.getNota());
+
             }
+
+
 
         }else{
             id_linguagem = 0;
         }
+
+
+        //String[] notas = getResources().getStringArray(R.array.notas);
+
     }
 
     //Funcao para inflar o menu na tela
@@ -85,11 +123,33 @@ public class LanguagesActivity extends AppCompatActivity {
         return super.onOptionsItemSelected(item);
     }
 
+    private void notaAdapter(){
+        ArrayList<Nota> nota = new ArrayList<>();
+        nota.add(new Nota(0, "Sem nota"));
+        nota.add(new Nota(1, "1"));
+        nota.add(new Nota(2, "2"));
+
+
+
+        ArrayAdapter<Nota> adapter = new ArrayAdapter<>(context, android.R.layout.simple_list_item_1, nota);
+
+        spinner.setAdapter(adapter);
+    }
+
     private void salvar(){
         try{
 
             String nome = txtNome.getText().toString().trim();
             String descricao = txtDescricao.getText().toString().trim();
+            boolean favorito = favorit.isChecked();
+            int favoritoBanco = 0;
+            if(favorito){
+                favoritoBanco = 1;
+            }
+
+
+            Nota nota = (Nota) spinner.getSelectedItem();
+            int testeNota = nota.getId();
 
             if(!nome.equals("") && !descricao.equals("")) {
 
@@ -102,7 +162,8 @@ public class LanguagesActivity extends AppCompatActivity {
                 objeto = new Language();
                 objeto.setName(nome);
                 objeto.setDescription(descricao);
-
+                objeto.setFavorito(favoritoBanco);
+                objeto.setNota(nota.getId());
                 controller = new LanguageController(context);
 
                 boolean retorno = false;

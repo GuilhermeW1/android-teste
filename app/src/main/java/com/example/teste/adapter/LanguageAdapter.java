@@ -8,7 +8,8 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.ImageView;
-import android.widget.TextView;
+    import android.widget.Spinner;
+    import android.widget.TextView;
     import android.widget.Toast;
 
 
@@ -17,6 +18,7 @@ import android.widget.TextView;
     import com.example.teste.R;
     import com.example.teste.Tools;
     import com.example.teste.models.Language;
+    import com.example.teste.models.Nota;
 
     import java.util.ArrayList;
 
@@ -44,18 +46,23 @@ import android.widget.TextView;
 
                 TextView description = rowView.findViewById(R.id.lblItem_description_language);
                 TextView name = rowView.findViewById(R.id.lblName_item_language);
-                //imgview favorito = row.findasdf......
+                ImageView favorito = rowView.findViewById(R.id.estrela_imageView);
+                //Spinner spinner = rowView.findViewById(R.id.spininer);
+
+
+                //spinner.setAdapter();
+
                 name.setText(objeto.getName());
                 description.setText(objeto.getDescription());
 
-                /*
+
                 if(objeto.getFavorito() == 1){
                     favorito.setVisibility(View.VISIBLE);
 
                 }else{
                     favorito.setVisibility(View.GONE);
                 }
-                */
+
 
                 rowView.setOnClickListener(new View.OnClickListener() {
                     @Override
