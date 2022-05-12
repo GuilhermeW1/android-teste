@@ -7,7 +7,9 @@ import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
+import android.util.Log;
 
+import com.example.teste.Tools;
 import com.example.teste.database.DadosOpenHelper;
 import com.example.teste.database.Tables;
 import com.example.teste.models.Language;
@@ -26,11 +28,9 @@ import java.util.ArrayList;
 
         }
 
-
         public Language buscar(int id){
             try{
-
-                Language objeto = null;
+               Language objeto = null;
 
                 StringBuilder sql = new StringBuilder();
                 sql.append("SELECT * FROM ");
@@ -51,7 +51,8 @@ import java.util.ArrayList;
                 return objeto;
 
             }catch (Exception ex){
-                //Globais.exibirMensagem(context, ex.getMessage());
+                Tools.toastMessage(ex.getMessage(), context);
+                Log.e("ERRO BUSCAR CONTROLLER", ex.getMessage());
                 return null;
             }
         }
@@ -72,7 +73,8 @@ import java.util.ArrayList;
                 return true;
 
             }catch (Exception ex){
-                //Globais.exibirMensagem(context, ex.getMessage());
+                Tools.toastMessage(ex.getMessage(), context);
+                Log.e("ERRO INCLUIR CONTROLLER", ex.getMessage());
                 return false;
             }
         }
@@ -94,23 +96,25 @@ import java.util.ArrayList;
                 return true;
 
             }catch (Exception ex){
-                //Globais.exibirMensagem(context, ex.getMessage());
+                Tools.toastMessage(ex.getMessage(), context);
+                Log.e("ERRO ALTERAR CONTROLLER", ex.getMessage());
                 return false;
             }
         }
 
-        public boolean excluir(Language objeto){
+        public boolean excluir(int id){
             try{
 
                 String[] parametros = new String[1];
-                parametros[0] = String.valueOf(objeto.getId());
+                parametros[0] = String.valueOf(id);
 
                 conexao.delete(Tables.TB_LINGUAGENS, "id = ?", parametros);
 
                 return true;
 
             }catch (Exception ex){
-                //Globais.exibirMensagem(context, ex.getMessage());
+                Tools.toastMessage(ex.getMessage(), context);
+                Log.e("ERRO EXCLUIR CONTROLLER", ex.getMessage());
                 return false;
             }
         }
@@ -146,10 +150,13 @@ import java.util.ArrayList;
                 return listagem;
 
             }catch (Exception ex){
-               // Globais.exibirMensagem(context, ex.getMessage());
+                Tools.toastMessage(ex.getMessage(), context);
+                Log.e("ERRO LISTA CONTROLLER", ex.getMessage());
                 return listagem;
             }
         }
+
+
 
     }
 

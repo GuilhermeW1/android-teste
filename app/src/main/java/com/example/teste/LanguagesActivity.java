@@ -47,51 +47,46 @@ public class LanguagesActivity extends AppCompatActivity {
         favorit = findViewById(R.id.checkboxFavorit);
         spinner = findViewById(R.id.spininer);
 
+        spinner.setAdapter(notaAdapter());
 
         //Verificar se veio algum EXTRA da tela anterior
         Bundle extras = getIntent().getExtras();
-        notaAdapter();
+        try {
+            if (extras != null) {
+                id_linguagem = extras.getInt("id", 0);
 
-        if(extras != null){
-            id_linguagem = extras.getInt("id", 0);
+                //buscar através desta chave
+                controller = new LanguageController(context);
+                objeto = controller.buscar(id_linguagem);
 
-            //buscar através desta chave
-            controller = new LanguageController(context);
-            objeto = controller.buscar(id_linguagem);
+                if (objeto != null) {
+                    txtNome.setText(objeto.getName());
+                    txtDescricao.setText(objeto.getDescription());
 
-            if(objeto != null){
-                txtNome.setText(objeto.getName());
-                txtDescricao.setText(objeto.getDescription());
+                    if (objeto.getFavorito() == 1) {
+                        favorit.setChecked(true);
+                    } else {
+                        favorit.setChecked(false);
+                    }
 
-                if(objeto.getFavorito() == 1){
-                    favorit.setChecked(true);
-                }else{
-                    favorit.setChecked(false);
-                }
+                    for (int i = 0; i <= spinner.getAdapter().getCount(); i++) {
 
-                /*
-                for(int x =0; ;x++){
-                    if(spinner.getAdapter().getItemId(x) != objeto.getNota()){
 
-                    }else{
-                        break;
+                        Nota nota = (Nota) spinner.getItemAtPosition(i);
+                        if (objeto.getNota() == nota.getId()) {
+                            System.out.println("entrei");
+                            spinner.setSelection(i);
+                            break;
+                        }
                     }
                 }
-                */
-
-                spinner.setSelection(objeto.getNota());
-
+            } else {
+                id_linguagem = 0;
             }
-
-
-
-        }else{
-            id_linguagem = 0;
+        }catch (Exception ex){
+            Tools.toastMessage(ex.getMessage(), context);
+            Log.e("ERRO", ex.getMessage());
         }
-
-
-        //String[] notas = getResources().getStringArray(R.array.notas);
-
     }
 
     //Funcao para inflar o menu na tela
@@ -123,17 +118,18 @@ public class LanguagesActivity extends AppCompatActivity {
         return super.onOptionsItemSelected(item);
     }
 
-    private void notaAdapter(){
+
+    private ArrayAdapter<Nota> notaAdapter()
+    {
         ArrayList<Nota> nota = new ArrayList<>();
         nota.add(new Nota(0, "Sem nota"));
         nota.add(new Nota(1, "1"));
         nota.add(new Nota(2, "2"));
 
-
-
         ArrayAdapter<Nota> adapter = new ArrayAdapter<>(context, android.R.layout.simple_list_item_1, nota);
 
-        spinner.setAdapter(adapter);
+        return adapter;
+
     }
 
     private void salvar(){
@@ -147,9 +143,7 @@ public class LanguagesActivity extends AppCompatActivity {
                 favoritoBanco = 1;
             }
 
-
             Nota nota = (Nota) spinner.getSelectedItem();
-            int testeNota = nota.getId();
 
             if(!nome.equals("") && !descricao.equals("")) {
 
@@ -158,6 +152,7 @@ public class LanguagesActivity extends AppCompatActivity {
                             //"O nome é muito grande, credo.");
                     return;
                 }
+                //TODO validacoes de nota etc
 
                 objeto = new Language();
                 objeto.setName(nome);
@@ -182,8 +177,8 @@ public class LanguagesActivity extends AppCompatActivity {
             }
 
         }catch (Exception ex){
-           //Globais.exibirMensagem(context, ex.getMessage());
-           // Log.e("ERRO", ex.getMessage());
+            Tools.toastMessage(ex.getMessage(), context);
+            Log.e("ERRO", ex.getMessage());
         }
     }
 }

@@ -49,17 +49,18 @@
 
                 >
             </Button>
+
             <Button
-                android:id="@+id/btnView"
+                android:id="@+id/btnPerson"
+                style="@style/ButtonDefault"
                 android:layout_width="300dp"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
                 android:layout_marginTop="30dp"
-                android:text="View"
-                style="@style/ButtonDefault"
+                android:text="Person"
 
-                >
-            </Button>
+                ></Button>
+
             <Button
                 android:id="@+id/btnToast"
                 android:layout_width="300dp"

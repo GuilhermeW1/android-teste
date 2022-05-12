@@ -26,7 +26,7 @@ public class MenuActivity extends AppCompatActivity {
         Button btnTabuada = findViewById(R.id.btnTabuada);
         Context context = MenuActivity.this;
         Button btnCalculadora = findViewById(R.id.btnCalculadora);
-        Button btnViewWithTwoButtons = findViewById(R.id.btnView);
+        Button btnPerson = findViewById(R.id.btnPerson);
         Button btnToast = findViewById(R.id.btnToast);
         Button btnSnackbar = findViewById(R.id.btnSnackbar);
         Button btnLogout = findViewById(R.id.btnLogout);
@@ -66,10 +66,10 @@ public class MenuActivity extends AppCompatActivity {
             }
         });
 
-        btnViewWithTwoButtons.setOnClickListener(new View.OnClickListener() {
+        btnPerson.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(context, ButtonsActivitty.class);
+                Intent intent = new Intent(context, PersonListActivity.class);
                 startActivity(intent);
 
             }

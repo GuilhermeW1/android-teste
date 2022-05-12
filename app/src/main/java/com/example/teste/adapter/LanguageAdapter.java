@@ -3,7 +3,8 @@ package com.example.teste.adapter;
 
     import android.content.Context;
 import android.content.Intent;
-import android.view.LayoutInflater;
+    import android.util.Log;
+    import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
@@ -47,14 +48,9 @@ import android.widget.ImageView;
                 TextView description = rowView.findViewById(R.id.lblItem_description_language);
                 TextView name = rowView.findViewById(R.id.lblName_item_language);
                 ImageView favorito = rowView.findViewById(R.id.estrela_imageView);
-                //Spinner spinner = rowView.findViewById(R.id.spininer);
-
-
-                //spinner.setAdapter();
 
                 name.setText(objeto.getName());
                 description.setText(objeto.getDescription());
-
 
                 if(objeto.getFavorito() == 1){
                     favorito.setVisibility(View.VISIBLE);
@@ -62,7 +58,6 @@ import android.widget.ImageView;
                 }else{
                     favorito.setVisibility(View.GONE);
                 }
-
 
                 rowView.setOnClickListener(new View.OnClickListener() {
                     @Override
@@ -77,6 +72,7 @@ import android.widget.ImageView;
 
             }catch (Exception ex){
                 Tools.toastMessage(ex.getMessage(), context);
+                Log.e("ERRO LANGUAGE ADAPTER GETVIEW", ex.getMessage());
                 return null;
             }
 

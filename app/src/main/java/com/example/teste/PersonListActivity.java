@@ -6,50 +6,50 @@ import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
-import android.view.MenuInflater;
-import android.view.MenuItem;
 import android.view.View;
-import android.view.Menu;
-
-
 import android.widget.Button;
-import android.widget.EditText;
 import android.widget.ListView;
 
 import com.example.teste.adapter.LanguageAdapter;
+import com.example.teste.adapter.PersonAdapter;
 import com.example.teste.controllers.LanguageController;
+import com.example.teste.controllers.PersonController;
 import com.example.teste.models.Language;
-
+import com.example.teste.models.Person;
 
 import java.util.ArrayList;
 
-public class ListActivity extends AppCompatActivity {
+public class PersonListActivity extends AppCompatActivity {
+
     Button btnNova;
     ListView ltvLista;
-    ArrayList<Language> listagem;
-    LanguageAdapter adapter;
+    ArrayList<Person> listagem;
+    PersonAdapter adapter;
     Context context;
-    LanguageController controller;
+    PersonController controller;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_list);
-        context = ListActivity.this;
+        setContentView(R.layout.activity_person_list);
 
-        btnNova = findViewById(R.id.btnAddLinguagem_linguagens);
-        ltvLista = findViewById(R.id.ltvLista_linguagem);
+        context = PersonListActivity.this;
+
+        btnNova = findViewById(R.id.btnAdd_new_person);
+        System.out.println("cheguei aqui");
+        ltvLista = findViewById(R.id.list_view_person);
+        System.out.println("passei");
 
         btnNova.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(context, LanguagesActivity.class);
+                System.out.println("intent");
+                Intent intent = new Intent(context, PersonActivity.class);
                 startActivity(intent);
             }
         });
 
     }
-
     @Override
     protected void onResume() {
         super.onResume();
@@ -58,11 +58,11 @@ public class ListActivity extends AppCompatActivity {
 
     private void atualizarLista(){
         try {
-            System.out.println("cheguei no atua");
-            controller = new LanguageController(context);
+
+            controller = new PersonController(context);
             listagem = controller.lista();
 
-            adapter = new LanguageAdapter(context, listagem);
+            adapter = new PersonAdapter(context, listagem);
             ltvLista.setAdapter(adapter);
 
         }catch (Exception ex){

@@ -8,8 +8,10 @@ import android.widget.Toast;
 
 import com.example.teste.Tools;
 
+import java.sql.SQLOutput;
+
 public class DadosOpenHelper extends SQLiteOpenHelper {
-    private static final int VERSION = 3; //versão do banco de dados
+    private static final int VERSION = 4; //versão do banco de dados
     private static final String NM_BANCO = "bancao";
     private Context context;
 
@@ -20,6 +22,7 @@ public class DadosOpenHelper extends SQLiteOpenHelper {
 
     @Override
     public void onCreate(SQLiteDatabase db) {
+        System.out.println("to criando o banco a");
         try{
             StringBuilder sql = new StringBuilder();
             sql.append(" CREATE TABLE IF NOT EXISTS ");
@@ -30,11 +33,20 @@ public class DadosOpenHelper extends SQLiteOpenHelper {
             sql.append(" description TEXT, ");
             sql.append(" favorito BIT, ");
             sql.append(" nota int ");
-            sql.append(")");
+            sql.append("); ");
+            sql.append(" CREATE TABLE IF NOT EXISTS ");
+            sql.append(Tables.TB_PERSON);
+            sql.append(" (");
+            sql.append(" id INTEGER PRIMARY KEY AUTOINCREMENT, ");
+            sql.append(" name VARCHAR(30) NOT NULL ");
+            sql.append(") ");
             db.execSQL(sql.toString());
+
+
 
         }catch (Exception ex){
             Tools.toastMessage(ex.getMessage(), context);
+            Log.e("erro ", ex.getMessage());
         }
     }
 
@@ -44,9 +56,11 @@ public class DadosOpenHelper extends SQLiteOpenHelper {
     @Override
     public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
         StringBuilder sql;
+        System.out.println("to criando o banco");
         try{
-
+            System.out.println("entrei aqui");
             if(newVersion >= 2) {
+
                 try{
                     sql = new StringBuilder();
                     sql.append(" ALTER TABLE ");
@@ -56,9 +70,10 @@ public class DadosOpenHelper extends SQLiteOpenHelper {
 
                     db.execSQL(sql.toString());
                 }catch (Exception ex){
-                    Log.e("Alter table", ex.getMessage());
+                    Log.e("Alter table add column favorito", ex.getMessage());
 
                 }
+
                 try{
                     sql = new StringBuilder();
                     sql.append(" ALTER TABLE ");
@@ -68,8 +83,24 @@ public class DadosOpenHelper extends SQLiteOpenHelper {
 
                     db.execSQL(sql.toString());
                 }catch (Exception ex){
-                    Log.e("Alter table", ex.getMessage());
+                    Log.e("Alter table add column nota", ex.getMessage());
                 }
+
+                try{
+                    sql = new StringBuilder();
+                    sql.append(" CREATE TABLE IF NOT EXISTS ");
+                    sql.append(Tables.TB_PERSON);
+                    sql.append(" (");
+                    sql.append(" id INTEGER PRIMARY KEY AUTOINCREMENT, ");
+                    sql.append(" name VARCHAR(30 NOT NULL ");
+                    sql.append(") ");
+
+                    db.execSQL(sql.toString());
+
+                }catch (Exception e){
+                    Log.e("alter table add person table", e.getMessage());
+                }
+
             }
 
         }catch (Exception ex){
