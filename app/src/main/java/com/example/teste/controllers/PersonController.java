@@ -58,6 +58,7 @@ public class PersonController {
         try {
             ContentValues values = new ContentValues();
             values.put("name", object.getName());
+            values.put("phone", object.getPhone());
 
             conexao.insertOrThrow(Tables.TB_PERSON, null, values);
 
@@ -107,6 +108,7 @@ public class PersonController {
 
                     objeto.setId(resultado.getInt(resultado.getColumnIndexOrThrow("id")));
                     objeto.setName(resultado.getString(resultado.getColumnIndexOrThrow("name")));
+                    objeto.setPhone(resultado.getString(resultado.getColumnIndexOrThrow("phone")));
 
                     listagem.add(objeto);
 

@@ -3,108 +3,44 @@ package com.example.teste;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Context;
-import android.content.Intent;
 import android.os.Bundle;
+import android.provider.ContactsContract;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
-import android.view.View;
 import android.widget.ArrayAdapter;
-import android.widget.Button;
-import android.widget.CheckBox;
 import android.widget.EditText;
-import android.widget.ListView;
-import android.widget.Spinner;
 
-import com.example.teste.adapter.LanguageAdapter;
-import com.example.teste.adapter.PersonAdapter;
 import com.example.teste.controllers.LanguageController;
 import com.example.teste.controllers.PersonController;
 import com.example.teste.models.Language;
 import com.example.teste.models.Nota;
 import com.example.teste.models.Person;
+import com.santalu.maskara.widget.MaskEditText;
 
 import java.util.ArrayList;
+import java.util.Date;
 
-public class PersonActivity extends AppCompatActivity {
+public class AddPersonActivity extends AppCompatActivity {
 
-
-
-    Button btnNova;
-    ListView ltvLista;
-    ArrayList<Person> listagem;
-    PersonAdapter adapter;
-    Context context;
-    PersonController controller;
-
-    @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_person_activitty);
-        context = PersonActivity.this;
-
-        btnNova = findViewById(R.id.personActivity_btnAddPerson);
-        ltvLista = findViewById(R.id.personActivity_itemPerson_List);
-
-        btnNova.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent intent = new Intent(context, AddPersonActivity.class);
-                startActivity(intent);
-            }
-        });
-
-    }
-
-    @Override
-    protected void onResume() {
-        super.onResume();
-        atualizarLista();
-    }
-
-    private void atualizarLista(){
-        try {
-            System.out.println("cheguei no atua");
-            controller = new PersonController(context);
-            listagem = controller.lista();
-
-            adapter = new PersonAdapter(context, listagem);
-            ltvLista.setAdapter(adapter);
-
-        }catch (Exception ex){
-            Tools.toastMessage(ex.getMessage(), context);
-            Log.e("ERRO", ex.getMessage());
-        }
-    }
-
-    /*
-    EditText txtNome;
-    EditText txtDescricao;
     Person objeto;
     PersonController controller;
     Context context;
+    EditText txtNome;
+    MaskEditText phoneNumber;
     int idPerson;
-    Button addPerson;
 
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_person_activitty);
+        setContentView(R.layout.activity_add_person);
 
-        txtNome = findViewById(R.id.txtPerson_name);
-        context = PersonActivity.this;
-        addPerson = findViewById(R.id.btnAddPerson);
+        txtNome = findViewById(R.id.addPersonActivity_txt_PersonName);
+        phoneNumber = findViewById(R.id.addPersonActivity_mask_phoneNumber);
 
-        addPerson.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                String name = txtNome.getText().toString();
-
-                salvar(name);
-            }
-        });
+        context = AddPersonActivity.this;
 
         //Verificar se veio algum EXTRA da tela anterior
         Bundle extras = getIntent().getExtras();
@@ -118,6 +54,8 @@ public class PersonActivity extends AppCompatActivity {
 
                 if (objeto != null) {
                     txtNome.setText(objeto.getName());
+                    phoneNumber.setText(objeto.getPhone());
+
                 }
             } else {
                 idPerson = 0;
@@ -128,11 +66,42 @@ public class PersonActivity extends AppCompatActivity {
         }
     }
 
+    //Funcao para inflar o menu na tela
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        MenuInflater inflater = getMenuInflater();
+        inflater.inflate(R.menu.menu_cad, menu);
 
-    private void salvar(String name){
+        return super.onCreateOptionsMenu(menu);
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        int id = item.getItemId();
+
+        switch (id){
+
+            case R.id.action_ok:
+
+                //SALVAR
+                salvar();
+
+            case R.id.action_cancel:
+
+                finish();
+
+        }
+
+        return super.onOptionsItemSelected(item);
+    }
+
+
+    private void salvar(){
         try{
 
-            String nome = name;
+            String nome = txtNome.getText().toString().trim();
+            String phone = phoneNumber.getUnMasked();
+
 
             if(!nome.equals("")) {
 
@@ -141,9 +110,12 @@ public class PersonActivity extends AppCompatActivity {
                     //"O nome é muito grande, credo.");
                     return;
                 }
+                //TODO validacoes de nota etc
 
                 objeto = new Person();
                 objeto.setName(nome);
+                objeto.setPhone(phone);
+
                 controller = new PersonController(context);
 
                 boolean retorno = false;
@@ -166,8 +138,4 @@ public class PersonActivity extends AppCompatActivity {
             Log.e("ERRO", ex.getMessage());
         }
     }
-
-
-     */
-
-}
+    }

@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".AddPersonActivity"
+    android:orientation="vertical">
+
+
+    <EditText
+        android:id="@+id/addPersonActivity_txt_PersonName"
+        android:hint="nome"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"/>
+
+    <com.santalu.maskara.widget.MaskEditText
+        android:id="@+id/addPersonActivity_mask_phoneNumber"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:inputType="number"
+        app:mask="(__) _____ - ____"
+        app:maskCharacter="_"
+        app:maskStyle="completable" />
+
+</LinearLayout>

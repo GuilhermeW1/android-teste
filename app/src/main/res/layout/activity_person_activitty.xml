@@ -7,9 +7,16 @@
     tools:context=".PersonActivity"
     android:orientation="vertical"
     >
+    <Button
+        android:id="@+id/personActivity_btnAddPerson"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="adicionar pessoa"
+        android:textSize="20dp">
 
-    <EditText
-        android:id="@+id/txtPerson_name"
+    </Button>
+    <ListView
+        android:id="@+id/personActivity_itemPerson_List"
         android:hint="nome"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"/>

@@ -14,7 +14,7 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.Teste" >
         <activity
-            android:name=".PersonListActivity"
+            android:name=".AddPersonActivity"
             android:exported="false" />
         <activity
             android:name=".LanguagesActivity"

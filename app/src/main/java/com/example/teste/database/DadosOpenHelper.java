@@ -11,7 +11,7 @@ import com.example.teste.Tools;
 import java.sql.SQLOutput;
 
 public class DadosOpenHelper extends SQLiteOpenHelper {
-    private static final int VERSION = 4; //versão do banco de dados
+    private static final int VERSION = 5; //versão do banco de dados
     private static final String NM_BANCO = "bancao";
     private Context context;
 
@@ -33,13 +33,21 @@ public class DadosOpenHelper extends SQLiteOpenHelper {
             sql.append(" description TEXT, ");
             sql.append(" favorito BIT, ");
             sql.append(" nota int ");
-            sql.append("); ");
+            sql.append(") ");
+
+            db.execSQL(sql.toString());
+            System.out.println("passei aqui");
+
+            sql = new StringBuilder();
             sql.append(" CREATE TABLE IF NOT EXISTS ");
             sql.append(Tables.TB_PERSON);
             sql.append(" (");
             sql.append(" id INTEGER PRIMARY KEY AUTOINCREMENT, ");
-            sql.append(" name VARCHAR(30) NOT NULL ");
+            sql.append(" name VARCHAR(30) NOT NULL, ");
+            sql.append(" dataNascimento date, ");
+            sql.append(" phone VARCHAR(30) NOT NULL ");
             sql.append(") ");
+
             db.execSQL(sql.toString());
 
 
@@ -59,7 +67,8 @@ public class DadosOpenHelper extends SQLiteOpenHelper {
         System.out.println("to criando o banco");
         try{
             System.out.println("entrei aqui");
-            if(newVersion >= 2) {
+            System.out.println(newVersion);
+            if(newVersion >= 5) {
 
                 try{
                     sql = new StringBuilder();
@@ -100,6 +109,33 @@ public class DadosOpenHelper extends SQLiteOpenHelper {
                 }catch (Exception e){
                     Log.e("alter table add person table", e.getMessage());
                 }
+
+                try{
+                    sql = new StringBuilder();
+                    sql.append(" ALTER TABLE ");
+                    sql.append(Tables.TB_PERSON);
+                    sql.append(" ADD COLUMN");
+                    sql.append(" dataNascimento date ");
+
+                    db.execSQL(sql.toString());
+
+                }catch (Exception e){
+                    Log.e("alter table add person table", e.getMessage());
+                }
+
+                try{
+                    sql = new StringBuilder();
+                    sql.append(" ALTER TABLE ");
+                    sql.append(Tables.TB_PERSON);
+                    sql.append(" ADD COLUMN");
+                    sql.append(" phone VARCHAR(30) NOT NULL ");
+
+                    db.execSQL(sql.toString());
+
+                }catch (Exception e){
+                    Log.e("alter table add person table", e.getMessage());
+                }
+
 
             }
 

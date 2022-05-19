@@ -69,7 +69,7 @@ public class MenuActivity extends AppCompatActivity {
         btnPerson.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(context, PersonListActivity.class);
+                Intent intent = new Intent(context, PersonActivity.class);
                 startActivity(intent);
 
             }

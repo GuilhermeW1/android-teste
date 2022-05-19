@@ -1,8 +1,20 @@
 package com.example.teste.models;
 
+import java.util.Date;
+
 public class Person {
     private int id;
     private String name;
+    //private Date dtNascimento;
+    private String phone;
+
+    public String getPhone() {
+        return phone;
+    }
+
+    public void setPhone(String phone) {
+        this.phone = phone;
+    }
 
     public int getId() {
         return id;
