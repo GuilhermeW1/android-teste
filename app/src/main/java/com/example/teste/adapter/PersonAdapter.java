@@ -41,12 +41,11 @@ public class PersonAdapter extends ArrayAdapter<Person> {
             View rowView = inflater.inflate(R.layout.item_list_person, parent, false);
 
 
-            //TODO fazer uma funcao para adicionar uma mascara quando e mostrado na tela
+
             TextView name = rowView.findViewById(R.id.imteList_Xml_lblItemPersonName);
             TextView phone = rowView.findViewById(R.id.itemList_Xml_phoneNumber);
 
             name.setText(objeto.getName());
-
             phone.setText(objeto.getPhone());
 
             rowView.setOnClickListener(new View.OnClickListener() {
@@ -68,9 +67,5 @@ public class PersonAdapter extends ArrayAdapter<Person> {
 
     }
 
-    private String mascaredePhone(String phone){
-
-        return "";
-    }
 }
 

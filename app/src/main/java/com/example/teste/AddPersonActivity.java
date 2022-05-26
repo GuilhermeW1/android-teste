@@ -2,14 +2,18 @@ package com.example.teste;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.app.DatePickerDialog;
 import android.content.Context;
+
 import android.os.Bundle;
 import android.provider.ContactsContract;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
+import android.view.View;
 import android.widget.ArrayAdapter;
+import android.widget.DatePicker;
 import android.widget.EditText;
 
 import com.example.teste.controllers.LanguageController;
@@ -19,7 +23,11 @@ import com.example.teste.models.Nota;
 import com.example.teste.models.Person;
 import com.santalu.maskara.widget.MaskEditText;
 
+import java.text.DateFormat;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.Date;
 
 public class AddPersonActivity extends AppCompatActivity {
@@ -31,6 +39,7 @@ public class AddPersonActivity extends AppCompatActivity {
     MaskEditText phoneNumber;
     int idPerson;
 
+    EditText txtData;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -39,8 +48,12 @@ public class AddPersonActivity extends AppCompatActivity {
 
         txtNome = findViewById(R.id.addPersonActivity_txt_PersonName);
         phoneNumber = findViewById(R.id.addPersonActivity_mask_phoneNumber);
+        txtData = findViewById(R.id.addPersonActivity_mask_date);
 
         context = AddPersonActivity.this;
+
+
+
 
         //Verificar se veio algum EXTRA da tela anterior
         Bundle extras = getIntent().getExtras();
@@ -54,7 +67,15 @@ public class AddPersonActivity extends AppCompatActivity {
 
                 if (objeto != null) {
                     txtNome.setText(objeto.getName());
-                    phoneNumber.setText(objeto.getPhone());
+                    String teste = objeto.getPhone();
+
+//                    String CEP = "12345678";
+//                    String a = (CEP.substring(0, 5) + "-" + CEP.substring(5));
+//                    String TEL = "1234567890123";
+//                    String b =("(" + TEL.substring(0, 2) + ")" + TEL.substring(2, 6) + "-" + TEL.substring(6, 10));
+
+                    String phoneFormated  = Tools.parsePhoneNumber(objeto.getPhone());
+                    phoneNumber.setText(phoneFormated);
 
                 }
             } else {
@@ -64,7 +85,54 @@ public class AddPersonActivity extends AppCompatActivity {
             Tools.toastMessage(ex.getMessage(), context);
             Log.e("ERRO", ex.getMessage());
         }
+
+
+        txtData.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Calendar calendario = Calendar.getInstance();
+
+                Date data;
+
+                try{
+                    if(txtData.getText().toString().equals("")){
+                        calendario = Calendar.getInstance();
+                    }else{
+                        String dtStart = txtData.getText().toString();
+                        SimpleDateFormat format = new SimpleDateFormat("dd/MM/yyyy");
+                        try {
+                            data = format.parse(dtStart);
+                            calendario.setTime(data);
+
+                        } catch (ParseException e) {
+                            e.printStackTrace();
+                            calendario = Calendar.getInstance();
+                        }
+                    }
+
+                    int ano = calendario.get(Calendar.YEAR);
+                    int mes = calendario.get(Calendar.MONTH);
+                    int dia = calendario.get(Calendar.DAY_OF_MONTH);
+
+                    new DatePickerDialog(context, mDateSetListener, ano, mes, dia).show();
+
+                }catch (Exception ex){
+                    calendario = Calendar.getInstance();
+                   //Globais.exibirMensagem(context, "Erro", "Erro ao abrir data");
+                }
+            }
+        });
     }
+
+    private DatePickerDialog.OnDateSetListener mDateSetListener = new DatePickerDialog.OnDateSetListener() {
+        @Override
+        public void onDateSet(DatePicker view, int year, int monthOfYear, int dayOfMonth) {
+            String data = String.valueOf(String.format("%02d", dayOfMonth)) + "/"+ String.valueOf(String.format("%02d", monthOfYear + 1)) + "/" + String.valueOf(String.format("%02d", year));
+
+            txtData.setText(data);
+        }
+    };
+
 
     //Funcao para inflar o menu na tela
     @Override
@@ -102,6 +170,13 @@ public class AddPersonActivity extends AppCompatActivity {
             String nome = txtNome.getText().toString().trim();
             String phone = phoneNumber.getUnMasked();
 
+            String data = txtData.getText().toString();
+            //String dataConvertedToSqlFormat = Tools.converterData(data, "dd/MM/yyyy", "yyyy-MM-dd");
+            Date dataForamt = new SimpleDateFormat("dd-MM-yyyy").parse(data);
+
+
+            //java.sql.Date dateSql = java.sql.Date.valueOf(dataConvertedToSqlFormat);
+
 
             if(!nome.equals("")) {
 
@@ -115,6 +190,7 @@ public class AddPersonActivity extends AppCompatActivity {
                 objeto = new Person();
                 objeto.setName(nome);
                 objeto.setPhone(phone);
+                objeto.setDtNascimento(dataForamt);
 
                 controller = new PersonController(context);
 
@@ -127,7 +203,7 @@ public class AddPersonActivity extends AppCompatActivity {
                 }
 
                 if(retorno) {
-                    //Globais.exibirMensagem(context, "Sucesso");
+                    Tools.toastMessage("Sucesso", context);
                     finish();
                 }
 

@@ -13,6 +13,7 @@ import com.example.teste.database.Tables;
 import com.example.teste.models.Language;
 import com.example.teste.models.Person;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 
 public class PersonController {
@@ -42,6 +43,7 @@ public class PersonController {
 
                 objeto.setId(resultado.getInt(resultado.getColumnIndexOrThrow("id")));
                 objeto.setName(resultado.getString(resultado.getColumnIndexOrThrow("name")));
+                objeto.setPhone(resultado.getString(resultado.getColumnIndexOrThrow("phone")));
 
             }
 
@@ -57,8 +59,14 @@ public class PersonController {
     public boolean insert(Person object){
         try {
             ContentValues values = new ContentValues();
+
             values.put("name", object.getName());
             values.put("phone", object.getPhone());
+
+            String dataCerta = new SimpleDateFormat("yyyy-MM-dd").format(object.getDtNascimento());
+            java.sql.Date dateSql = java.sql.Date.valueOf(dataCerta);
+
+            values.put("dataNascimenot", String.valueOf(dateSql));
 
             conexao.insertOrThrow(Tables.TB_PERSON, null, values);
 
@@ -75,6 +83,7 @@ public class PersonController {
 
             ContentValues valores = new ContentValues();
             valores.put("name", objeto.getName());
+            valores.put("phone", objeto.getPhone());
 
             String[] parametros = new String[1];
             parametros[0] = String.valueOf(objeto.getId());
@@ -108,7 +117,8 @@ public class PersonController {
 
                     objeto.setId(resultado.getInt(resultado.getColumnIndexOrThrow("id")));
                     objeto.setName(resultado.getString(resultado.getColumnIndexOrThrow("name")));
-                    objeto.setPhone(resultado.getString(resultado.getColumnIndexOrThrow("phone")));
+                    String phoneFormat = Tools.parsePhoneNumber(resultado.getString(resultado.getColumnIndexOrThrow("phone")));
+                    objeto.setPhone(phoneFormat);
 
                     listagem.add(objeto);
 
