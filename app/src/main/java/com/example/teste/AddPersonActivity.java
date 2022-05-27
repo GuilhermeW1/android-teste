@@ -189,7 +189,7 @@ public class AddPersonActivity extends AppCompatActivity {
                     Person newPerson = new Person();
                     newPerson = controller.buscar(idPerson);
                     objeto.setPhone(newPerson.getPhone());
-                    String b= objeto.getPhone() ;
+                    String a= objeto.getPhone() ;
                 }
 
                 String dataT = Tools.converterData(data, "dd/MM/yyyy", "yyyy-MM-dd");

@@ -40,11 +40,8 @@ public class PersonAdapter extends ArrayAdapter<Person> {
             //toda vez que passa por um item da lista, os elementos são associados
             View rowView = inflater.inflate(R.layout.item_list_person, parent, false);
 
-
-
             TextView name = rowView.findViewById(R.id.imteList_Xml_lblItemPersonName);
             TextView phone = rowView.findViewById(R.id.itemList_Xml_phoneNumber);
-
 
             name.setText(objeto.getName());
             phone.setText(objeto.getPhone());
@@ -65,8 +62,6 @@ public class PersonAdapter extends ArrayAdapter<Person> {
             Log.e("ERRO LANGUAGE ADAPTER GETVIEW", ex.getMessage());
             return null;
         }
-
     }
-
 }
 
