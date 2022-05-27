@@ -13,6 +13,7 @@ import com.example.teste.models.Nota;
 
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.Locale;
 
 public class Tools {
@@ -57,6 +58,21 @@ public class Tools {
         } finally {
             return wDataConvertida;
         }
+    }
+    public static Date convertStringToDate(String date){
+         try {
+
+             Date formatedDate = new SimpleDateFormat("yyyy-MM-dd").parse(date);
+             return formatedDate;
+         }catch (Exception e){
+             System.out.println(e.getMessage().toString());
+             return null;
+         }
+    }
+
+    public static String convertDateToString(Date date, String formatToParse){
+         String dataToString = new SimpleDateFormat(formatToParse).format(date);
+         return dataToString;
     }
 
 

@@ -20,6 +20,9 @@
         <entry key="..\:/Users/guilherme.w1/AndroidStudioProjects/Teste/app/src/main/res/layout/item_list_language.xml" value="0.36666666666666664" />
         <entry key="..\:/Users/guilherme.w1/AndroidStudioProjects/Teste/app/src/main/res/layout/item_list_person.xml" value="0.31313131313131315" />
         <entry key="..\:/Users/guilherme.w1/AndroidStudioProjects/Teste/app/src/main/res/menu/men_cad.xml" value="0.36666666666666664" />
+        <entry key="app/src/main/res/layout/activity_add_person.xml" value="0.15520833333333334" />
+        <entry key="app/src/main/res/layout/activity_person_activitty.xml" value="0.15520833333333334" />
+        <entry key="app/src/main/res/layout/item_list_person.xml" value="0.15520833333333334" />
       </map>
     </option>
   </component>

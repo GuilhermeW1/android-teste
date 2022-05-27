@@ -15,6 +15,7 @@ import com.example.teste.models.Person;
 
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 
 public class PersonController {
 
@@ -44,6 +45,7 @@ public class PersonController {
                 objeto.setId(resultado.getInt(resultado.getColumnIndexOrThrow("id")));
                 objeto.setName(resultado.getString(resultado.getColumnIndexOrThrow("name")));
                 objeto.setPhone(resultado.getString(resultado.getColumnIndexOrThrow("phone")));
+                objeto.setDtNascimento(resultado.getString(resultado.getColumnIndexOrThrow("dataNascimento")));
 
             }
 
@@ -62,11 +64,7 @@ public class PersonController {
 
             values.put("name", object.getName());
             values.put("phone", object.getPhone());
-
-            String dataCerta = new SimpleDateFormat("yyyy-MM-dd").format(object.getDtNascimento());
-            java.sql.Date dateSql = java.sql.Date.valueOf(dataCerta);
-
-            values.put("dataNascimenot", String.valueOf(dateSql));
+            values.put("dataNascimento", object.getDtNascimento());
 
             conexao.insertOrThrow(Tables.TB_PERSON, null, values);
 
@@ -84,6 +82,7 @@ public class PersonController {
             ContentValues valores = new ContentValues();
             valores.put("name", objeto.getName());
             valores.put("phone", objeto.getPhone());
+            valores.put("dataNascimento", objeto.getDtNascimento());
 
             String[] parametros = new String[1];
             parametros[0] = String.valueOf(objeto.getId());
@@ -93,7 +92,7 @@ public class PersonController {
             return true;
 
         }catch (Exception ex){
-            Tools.toastMessage(ex.getMessage(), context);
+            Tools.toastMessage("a"+ex.getMessage(), context);
             Log.e("ERRO ALTERAR PERSON CONTROLLER", ex.getMessage());
             return false;
         }
@@ -117,8 +116,13 @@ public class PersonController {
 
                     objeto.setId(resultado.getInt(resultado.getColumnIndexOrThrow("id")));
                     objeto.setName(resultado.getString(resultado.getColumnIndexOrThrow("name")));
+
                     String phoneFormat = Tools.parsePhoneNumber(resultado.getString(resultado.getColumnIndexOrThrow("phone")));
                     objeto.setPhone(phoneFormat);
+
+                    String dataFromDb = resultado.getString(resultado.getColumnIndexOrThrow("dataNascimento"));
+                    String data = Tools.converterData(dataFromDb, "yyyy-MM-dd", "dd/MM/yyyy");
+                    objeto.setDtNascimento(data);
 
                     listagem.add(objeto);
 

@@ -47,13 +47,13 @@ public class AddPersonActivity extends AppCompatActivity {
         setContentView(R.layout.activity_add_person);
 
         txtNome = findViewById(R.id.addPersonActivity_txt_PersonName);
+
         phoneNumber = findViewById(R.id.addPersonActivity_mask_phoneNumber);
+
+
         txtData = findViewById(R.id.addPersonActivity_mask_date);
 
         context = AddPersonActivity.this;
-
-
-
 
         //Verificar se veio algum EXTRA da tela anterior
         Bundle extras = getIntent().getExtras();
@@ -67,15 +67,13 @@ public class AddPersonActivity extends AppCompatActivity {
 
                 if (objeto != null) {
                     txtNome.setText(objeto.getName());
-                    String teste = objeto.getPhone();
-
-//                    String CEP = "12345678";
-//                    String a = (CEP.substring(0, 5) + "-" + CEP.substring(5));
-//                    String TEL = "1234567890123";
-//                    String b =("(" + TEL.substring(0, 2) + ")" + TEL.substring(2, 6) + "-" + TEL.substring(6, 10));
 
                     String phoneFormated  = Tools.parsePhoneNumber(objeto.getPhone());
                     phoneNumber.setText(phoneFormated);
+                    String data = objeto.getDtNascimento();
+                    String dataFormatada = Tools.converterData(data, "yyyy-MM-dd", "dd/MM/yyyy");
+                    txtData.setText(dataFormatada);
+
 
                 }
             } else {
@@ -166,16 +164,12 @@ public class AddPersonActivity extends AppCompatActivity {
 
     private void salvar(){
         try{
-
             String nome = txtNome.getText().toString().trim();
             String phone = phoneNumber.getUnMasked();
 
+
+
             String data = txtData.getText().toString();
-            //String dataConvertedToSqlFormat = Tools.converterData(data, "dd/MM/yyyy", "yyyy-MM-dd");
-            Date dataForamt = new SimpleDateFormat("dd-MM-yyyy").parse(data);
-
-
-            //java.sql.Date dateSql = java.sql.Date.valueOf(dataConvertedToSqlFormat);
 
 
             if(!nome.equals("")) {
@@ -188,9 +182,12 @@ public class AddPersonActivity extends AppCompatActivity {
                 //TODO validacoes de nota etc
 
                 objeto = new Person();
+
                 objeto.setName(nome);
                 objeto.setPhone(phone);
-                objeto.setDtNascimento(dataForamt);
+
+                String dataT = Tools.converterData(data, "dd/MM/yyyy", "yyyy-MM-dd");
+                objeto.setDtNascimento(dataT);
 
                 controller = new PersonController(context);
 
@@ -198,6 +195,7 @@ public class AddPersonActivity extends AppCompatActivity {
                 if(idPerson == 0){
                     retorno = controller.insert(objeto);
                 }else{
+                    objeto.setPhone(objeto.getPhone());
                     objeto.setId(idPerson);
                     retorno = controller.alterar(objeto);
                 }

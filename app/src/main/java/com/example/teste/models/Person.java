@@ -5,14 +5,14 @@ import java.util.Date;
 public class Person {
     private int id;
     private String name;
-    private Date dtNascimento;
+    private String dtNascimento;
     private String phone;
 
-    public Date getDtNascimento() {
+    public String getDtNascimento() {
         return dtNascimento;
     }
 
-    public void setDtNascimento(Date dtNascimento) {
+    public void setDtNascimento(String dtNascimento) {
         this.dtNascimento = dtNascimento;
     }
 

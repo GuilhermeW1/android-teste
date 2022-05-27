@@ -65,7 +65,6 @@ public class PersonActivity extends AppCompatActivity {
 
     private void atualizarLista(){
         try {
-            System.out.println("cheguei no atua");
             controller = new PersonController(context);
             listagem = controller.lista();
 
@@ -77,97 +76,5 @@ public class PersonActivity extends AppCompatActivity {
             Log.e("ERRO", ex.getMessage());
         }
     }
-
-    /*
-    EditText txtNome;
-    EditText txtDescricao;
-    Person objeto;
-    PersonController controller;
-    Context context;
-    int idPerson;
-    Button addPerson;
-
-
-    @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_person_activitty);
-
-        txtNome = findViewById(R.id.txtPerson_name);
-        context = PersonActivity.this;
-        addPerson = findViewById(R.id.btnAddPerson);
-
-        addPerson.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                String name = txtNome.getText().toString();
-
-                salvar(name);
-            }
-        });
-
-        //Verificar se veio algum EXTRA da tela anterior
-        Bundle extras = getIntent().getExtras();
-        try {
-            if (extras != null) {
-                idPerson = extras.getInt("id", 0);
-
-                //buscar através desta chave
-                controller = new PersonController(context);
-                objeto = controller.buscar(idPerson);
-
-                if (objeto != null) {
-                    txtNome.setText(objeto.getName());
-                }
-            } else {
-                idPerson = 0;
-            }
-        }catch (Exception ex){
-            Tools.toastMessage(ex.getMessage(), context);
-            Log.e("ERRO", ex.getMessage());
-        }
-    }
-
-
-    private void salvar(String name){
-        try{
-
-            String nome = name;
-
-            if(!nome.equals("")) {
-
-                if(nome.length() > 30){
-                    //Globais.exibirMensagem(context,
-                    //"O nome é muito grande, credo.");
-                    return;
-                }
-
-                objeto = new Person();
-                objeto.setName(nome);
-                controller = new PersonController(context);
-
-                boolean retorno = false;
-                if(idPerson == 0){
-                    retorno = controller.insert(objeto);
-                }else{
-                    objeto.setId(idPerson);
-                    retorno = controller.alterar(objeto);
-                }
-
-                if(retorno) {
-                    //Globais.exibirMensagem(context, "Sucesso");
-                    finish();
-                }
-
-            }
-
-        }catch (Exception ex){
-            Tools.toastMessage(ex.getMessage(), context);
-            Log.e("ERRO", ex.getMessage());
-        }
-    }
-
-
-     */
 
 }

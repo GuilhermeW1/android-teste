@@ -45,6 +45,7 @@ public class PersonAdapter extends ArrayAdapter<Person> {
             TextView name = rowView.findViewById(R.id.imteList_Xml_lblItemPersonName);
             TextView phone = rowView.findViewById(R.id.itemList_Xml_phoneNumber);
 
+
             name.setText(objeto.getName());
             phone.setText(objeto.getPhone());
 
