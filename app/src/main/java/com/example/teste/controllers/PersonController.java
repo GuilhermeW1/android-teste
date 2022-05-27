@@ -126,6 +126,8 @@ public class PersonController {
 
                     listagem.add(objeto);
 
+                    String teste;
+
                 }while (resultado.moveToNext());
 
             }
