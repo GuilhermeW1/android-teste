@@ -166,9 +166,6 @@ public class AddPersonActivity extends AppCompatActivity {
         try{
             String nome = txtNome.getText().toString().trim();
             String phone = phoneNumber.getUnMasked();
-
-
-
             String data = txtData.getText().toString();
 
 
@@ -184,7 +181,16 @@ public class AddPersonActivity extends AppCompatActivity {
                 objeto = new Person();
 
                 objeto.setName(nome);
-                objeto.setPhone(phone);
+
+                //gambiarra para contonar o mascaramento mal feito
+                if(!phone.equals("")){
+                    objeto.setPhone(phone);
+                }else{
+                    Person newPerson = new Person();
+                    newPerson = controller.buscar(idPerson);
+                    objeto.setPhone(newPerson.getPhone());
+                    String b= objeto.getPhone() ;
+                }
 
                 String dataT = Tools.converterData(data, "dd/MM/yyyy", "yyyy-MM-dd");
                 objeto.setDtNascimento(dataT);
@@ -195,7 +201,6 @@ public class AddPersonActivity extends AppCompatActivity {
                 if(idPerson == 0){
                     retorno = controller.insert(objeto);
                 }else{
-                    objeto.setPhone(objeto.getPhone());
                     objeto.setId(idPerson);
                     retorno = controller.alterar(objeto);
                 }
