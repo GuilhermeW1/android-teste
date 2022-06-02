@@ -7,6 +7,7 @@ public class Person {
     private String name;
     private String dtNascimento;
     private String phone;
+    private String cpf;
 
     public String getDtNascimento() {
         return dtNascimento;
@@ -38,6 +39,14 @@ public class Person {
 
     public void setName(String name) {
         this.name = name;
+    }
+
+    public String getCpf() {
+        return cpf;
+    }
+
+    public void setCpf(String cpf) {
+        this.cpf = cpf;
     }
 
     @Override

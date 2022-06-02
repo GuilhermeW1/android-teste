@@ -70,8 +70,6 @@ public class LanguagesActivity extends AppCompatActivity {
                     }
 
                     for (int i = 0; i <= spinner.getAdapter().getCount(); i++) {
-
-
                         Nota nota = (Nota) spinner.getItemAtPosition(i);
                         if (objeto.getNota() == nota.getId()) {
                             System.out.println("entrei");

@@ -13,6 +13,7 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.ArrayAdapter;
+import android.widget.Button;
 import android.widget.DatePicker;
 import android.widget.EditText;
 
@@ -37,7 +38,9 @@ public class AddPersonActivity extends AppCompatActivity {
     Context context;
     EditText txtNome;
     MaskEditText phoneNumber;
+    MaskEditText txtCpf;
     int idPerson;
+    Button btnExcluir;;
 
     EditText txtData;
 
@@ -50,10 +53,25 @@ public class AddPersonActivity extends AppCompatActivity {
 
         phoneNumber = findViewById(R.id.addPersonActivity_mask_phoneNumber);
 
-
         txtData = findViewById(R.id.addPersonActivity_mask_date);
-
+        txtCpf = findViewById(R.id.addPersonActivity_mask_cpf);
+        btnExcluir = findViewById(R.id.addPersonActivity_button_delete);
         context = AddPersonActivity.this;
+
+        btnExcluir.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                if(idPerson > 0){
+                    controller = new PersonController(context);
+                    boolean ret = controller.excluir(idPerson);
+
+                    if(ret){
+                        Tools.toastMessage("Successo", context);
+                        finish();
+                    }
+                }
+            }
+        });
 
         //Verificar se veio algum EXTRA da tela anterior
         Bundle extras = getIntent().getExtras();
@@ -68,16 +86,21 @@ public class AddPersonActivity extends AppCompatActivity {
                 if (objeto != null) {
                     txtNome.setText(objeto.getName());
 
+
                     String phoneFormated  = Tools.parsePhoneNumber(objeto.getPhone());
                     phoneNumber.setText(phoneFormated);
                     String data = objeto.getDtNascimento();
                     String dataFormatada = Tools.converterData(data, "yyyy-MM-dd", "dd/MM/yyyy");
                     txtData.setText(dataFormatada);
 
+                    String formatedCpf = Tools.parseCpf(objeto.getCpf());
+                    txtCpf.setText(formatedCpf);
+
 
                 }
             } else {
                 idPerson = 0;
+                btnExcluir.setVisibility(View.GONE);
             }
         }catch (Exception ex){
             Tools.toastMessage(ex.getMessage(), context);
@@ -165,9 +188,9 @@ public class AddPersonActivity extends AppCompatActivity {
     private void salvar(){
         try{
             String nome = txtNome.getText().toString().trim();
-            String phone = phoneNumber.getUnMasked();
+            String phone = phoneNumber.getText().toString();
             String data = txtData.getText().toString();
-
+            String cpf = txtCpf.getText().toString();
 
             if(!nome.equals("")) {
 
@@ -179,21 +202,32 @@ public class AddPersonActivity extends AppCompatActivity {
                 //TODO validacoes de nota etc
 
                 objeto = new Person();
-
                 objeto.setName(nome);
-
-                //gambiarra para contonar o mascaramento mal feito
-                if(!phone.equals("")){
-                    objeto.setPhone(phone);
-                }else{
-                    Person newPerson = new Person();
-                    newPerson = controller.buscar(idPerson);
-                    objeto.setPhone(newPerson.getPhone());
-                    String a= objeto.getPhone() ;
-                }
-
                 String dataT = Tools.converterData(data, "dd/MM/yyyy", "yyyy-MM-dd");
                 objeto.setDtNascimento(dataT);
+                String formatedPhone = Tools.soNumero(phone);
+                objeto.setPhone(formatedPhone);
+                String formatedCpf = Tools.soNumero(cpf);
+                objeto.setCpf(formatedCpf);
+
+
+//                //gambiarra para contonar o mascaramento mal feito
+//                Person newPerson = new Person();
+//                if (!phone.equals("")) {
+//                    objeto.setPhone(phone);
+//                } else {
+//                    newPerson = controller.buscar(idPerson);
+//                    objeto.setPhone(newPerson.getPhone());
+//                }
+//
+//                if (!cpf.equals("")) {
+//                    objeto.setCpf(cpf);
+//                } else {
+//                    newPerson = controller.buscar(idPerson);
+//                    objeto.setCpf(newPerson.getCpf());                 //
+//                }
+//                /////////////////////////////////////////////////////////
+
 
                 controller = new PersonController(context);
 

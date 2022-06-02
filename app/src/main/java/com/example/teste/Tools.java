@@ -37,10 +37,14 @@ public class Tools {
 
 
     public static String parsePhoneNumber(String phone){
-         String phoneNumber = phone;
-         String formatedPhone =("(" + phoneNumber.substring(0, 2) + ") " + phoneNumber.substring(2, 7) + " - " + phoneNumber.substring(7, 11));
+         try {
+             String phoneNumber = phone;
+             String formatedPhone = ("(" + phoneNumber.substring(0, 2) + ") " + phoneNumber.substring(2, 7) + " - " + phoneNumber.substring(7, 11));
 
-         return formatedPhone;
+             return formatedPhone;
+         }catch (Exception e){
+             return "";
+         }
   }
 
     public static String converterData(String data, String formatoInicial, String formatoDesejado) {
@@ -59,20 +63,24 @@ public class Tools {
             return wDataConvertida;
         }
     }
-    public static Date convertStringToDate(String date){
+    public static String parseCpf(String cpf){
          try {
+             String formatedCpf = "";
+             formatedCpf = (cpf.substring(0, 3) + "." + cpf.substring(3, 6) + "." + cpf.substring(6, 9) + "-" + cpf.substring(9, 11));
 
-             Date formatedDate = new SimpleDateFormat("yyyy-MM-dd").parse(date);
-             return formatedDate;
+             return formatedCpf;
          }catch (Exception e){
-             System.out.println(e.getMessage().toString());
-             return null;
-         }
+        return "";
+    }
     }
 
-    public static String convertDateToString(Date date, String formatToParse){
-         String dataToString = new SimpleDateFormat(formatToParse).format(date);
-         return dataToString;
+    public static String soNumero(String texto){
+         try{
+             String retorno = texto.replaceAll("\\D+", "");
+             return  retorno;
+         }catch (Exception e){
+             return "";
+         }
     }
 
 

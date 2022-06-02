@@ -32,4 +32,21 @@
         android:editable="false"
         />
 
+    <com.santalu.maskara.widget.MaskEditText
+        android:id="@+id/addPersonActivity_mask_cpf"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:inputType="number"
+        app:mask="___.___.___ - __"
+        android:hint="___.___.___ - __"
+        app:maskCharacter="_"
+        app:maskStyle="completable" />
+
+    <Button
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="deletar"
+        android:id="@+id/addPersonActivity_button_delete"
+        ></Button>
+
 </LinearLayout>

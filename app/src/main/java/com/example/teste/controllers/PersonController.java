@@ -46,6 +46,7 @@ public class PersonController {
                 objeto.setName(resultado.getString(resultado.getColumnIndexOrThrow("name")));
                 objeto.setPhone(resultado.getString(resultado.getColumnIndexOrThrow("phone")));
                 objeto.setDtNascimento(resultado.getString(resultado.getColumnIndexOrThrow("dataNascimento")));
+                objeto.setCpf(resultado.getString(resultado.getColumnIndexOrThrow("cpf")));
 
             }
 
@@ -65,6 +66,7 @@ public class PersonController {
             values.put("name", object.getName());
             values.put("phone", object.getPhone());
             values.put("dataNascimento", object.getDtNascimento());
+            values.put("cpf", object.getCpf());
 
             conexao.insertOrThrow(Tables.TB_PERSON, null, values);
 
@@ -83,6 +85,7 @@ public class PersonController {
             valores.put("name", objeto.getName());
             valores.put("phone", objeto.getPhone());
             valores.put("dataNascimento", objeto.getDtNascimento());
+            valores.put("cpf", objeto.getCpf());
 
             String[] parametros = new String[1];
             parametros[0] = String.valueOf(objeto.getId());
@@ -124,9 +127,9 @@ public class PersonController {
                     String data = Tools.converterData(dataFromDb, "yyyy-MM-dd", "dd/MM/yyyy");
                     objeto.setDtNascimento(data);
 
-                    listagem.add(objeto);
+                    objeto.setCpf(resultado.getString(resultado.getColumnIndexOrThrow("cpf")));
 
-                    String teste;
+                    listagem.add(objeto);
 
                 }while (resultado.moveToNext());
 
@@ -138,6 +141,23 @@ public class PersonController {
             Tools.toastMessage(ex.getMessage(), context);
             Log.e("ERRO LISTA CONTROLLER", ex.getMessage());
             return listagem;
+        }
+    }
+
+    public boolean excluir(int id){
+        try{
+
+            String[] parametros = new String[1];
+            parametros[0] = String.valueOf(id);
+
+            conexao.delete(Tables.TB_PERSON, "id = ?", parametros);
+
+            return true;
+
+        }catch (Exception ex){
+            Tools.toastMessage(ex.getMessage(), context);
+            Log.e("ERRO EXCLUIR CONTROLLER", ex.getMessage());
+            return false;
         }
     }
 

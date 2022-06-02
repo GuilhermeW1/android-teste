@@ -11,7 +11,7 @@ import com.example.teste.Tools;
 import java.sql.SQLOutput;
 
 public class DadosOpenHelper extends SQLiteOpenHelper {
-    private static final int VERSION = 5; //versão do banco de dados
+    private static final int VERSION = 6; //versão do banco de dados
     private static final String NM_BANCO = "bancao";
     private Context context;
 
@@ -45,7 +45,8 @@ public class DadosOpenHelper extends SQLiteOpenHelper {
             sql.append(" id INTEGER PRIMARY KEY AUTOINCREMENT, ");
             sql.append(" name VARCHAR(30) NOT NULL, ");
             sql.append(" dataNascimento date, ");
-            sql.append(" phone VARCHAR(30) NOT NULL ");
+            sql.append(" phone VARCHAR(30) NOT NULL, ");
+            sql.append(" cpf VARCHAR(11) NOT NULL ");
             sql.append(") ");
 
             db.execSQL(sql.toString());
@@ -129,6 +130,18 @@ public class DadosOpenHelper extends SQLiteOpenHelper {
                     sql.append(Tables.TB_PERSON);
                     sql.append(" ADD COLUMN");
                     sql.append(" phone VARCHAR(30) NOT NULL ");
+
+                    db.execSQL(sql.toString());
+
+                }catch (Exception e){
+                    Log.e("alter table add person table", e.getMessage());
+                }
+                try{
+                    sql = new StringBuilder();
+                    sql.append(" ALTER TABLE ");
+                    sql.append(Tables.TB_PERSON);
+                    sql.append(" ADD COLUMN");
+                    sql.append(" cpf VARCHAR(11) NOT NULL ");
 
                     db.execSQL(sql.toString());
 
